@@ -141,7 +141,7 @@ interface mgmt0
 
 ![image](https://github.com/user-attachments/assets/6df44f25-57d6-4858-9573-570279c6e34a)
 
-المهمة الثانية هي  كيفية تفعيل Peer status 
+المهمة الثانية هي  كيفية تفعيل peer-link status 
 
 NXOS-1
 ```
@@ -165,8 +165,75 @@ int po1
   no shutdown
 
 ```
-هذه الاوامر كفيلة بتفعيل Peer status 
+هذه الاوامر كفيلة بتفعيل peer-link status 
 
 ![image](https://github.com/user-attachments/assets/cce870d1-9c67-4aaa-a483-542b6a6e5132)
 
+
+المهمة الثالثة هي  كيفية تفعيل channel-group بين السويتشات و NXOS K9
+يجب الانتباه الى رقم interface  فقد لا يعمل بسبب اختلاف ارقام interface
+
+NXOS-1
+```
+interface Ethernet1/6
+  switchport mode trunk
+  channel-group 2 mode active
+  no shutdown
+
+interface Ethernet1/7
+  switchport mode trunk
+  channel-group 3 mode active
+  no shutdown
+
+int po2
+  vpc 2
+  no shutdown
+
+int po3
+  vpc 3
+  no shutdown
+
+```
+NXOS-2
+```
+interface Ethernet1/6
+  switchport mode trunk
+  channel-group 3 mode active
+  no shutdown
+
+interface Ethernet1/7
+  switchport mode trunk
+  channel-group 2 mode active
+  no shutdown
+
+int po2
+  vpc 2
+  no shutdown
+
+int po3
+  vpc 3
+  no shutdown
+
+
+```
+هذه الاوامر كفيلة بتفعيل channel-group بين السويتشات و NXOS K9
+
+![image](https://github.com/user-attachments/assets/d7350693-b6bd-4f3e-87eb-c92c77d9a44e)
+
+الخطوه الاخيره وضع ip لاجهزة pc وعمل ping لتاكد من ان جميع الاعدادت صحيحة
+
+PC-5
+```
+ip 192.168.1.1/24
+save
+
+```
+PC-6
+```
+ip 192.168.1.2/24
+save
+```
+هذه الاوامر كفيلة بأن يكون هناك ping بين اجهزة PCs
+
+![image](https://github.com/user-attachments/assets/8aa65091-ae00-4bd4-810d-443a4bb244ad)
 
