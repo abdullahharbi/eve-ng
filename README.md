@@ -162,7 +162,7 @@ interface Ethernet1/3
 NXOS-2
 ```
 conf t
-hostname NXOS-1
+hostname NXOS-2
 feature lacp
 feature vpc
 vrf context AAA
@@ -205,7 +205,7 @@ interface Ethernet1/3
 NXOS-2
 ```
 conf t
-hostname NXOS-1
+hostname NXOS-2
 feature lacp
 feature vpc
 feature interface-vlan
