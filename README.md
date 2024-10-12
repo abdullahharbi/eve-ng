@@ -187,7 +187,7 @@ feature lacp
 feature vpc
 feature interface-vlan
 vrf context BBB
-vlan 5
+vlan 10
 vpc domain 1
   role priority 10
   peer-keepalive destination 10.10.10.2 source 10.10.10.1 vrf BBB
@@ -198,7 +198,7 @@ interface vlan 5
   no shutdown
 
 interface Ethernet1/3
-  switchport access vlan 5
+  switchport access vlan 10
 
 
 ```
@@ -210,7 +210,7 @@ feature lacp
 feature vpc
 feature interface-vlan
 vrf context BBB
-vlan 5
+vlan 10
 vpc domain 1
   role priority 20
   peer-keepalive destination 10.10.10.1 source 10.10.10.2 vrf BBB
@@ -221,7 +221,7 @@ interface vlan 5
   no shutdown
 
 interface Ethernet1/3
-  switchport access vlan 5
+  switchport access vlan 10
 
 ```
 
