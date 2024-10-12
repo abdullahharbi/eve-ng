@@ -192,7 +192,7 @@ vpc domain 1
   role priority 10
   peer-keepalive destination 10.10.10.2 source 10.10.10.1 vrf BBB
 
-interface vlan 5
+interface vlan 10
   vrf member BBB
   ip address 10.10.10.1/24
   no shutdown
@@ -215,7 +215,7 @@ vpc domain 1
   role priority 20
   peer-keepalive destination 10.10.10.1 source 10.10.10.2 vrf BBB
 
-interface vlan 5
+interface vlan 10
   vrf member BBB
   ip address 10.10.10.2/24
   no shutdown
