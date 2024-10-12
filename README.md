@@ -1,4 +1,4 @@
-# EVE-NG NXOS K9 VPC  used management Configuration and vlan 10
+# EVE-NG NXOS K9 VPC  used management or interface or vlan 
 
 تطبيق عملى لبروتكول VPC على  K9 و k7 
 
