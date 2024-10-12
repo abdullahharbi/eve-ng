@@ -143,6 +143,10 @@ vlan 10
 
 NXOS-1
 ```
+conf t
+hostname NXOS-1
+feature lacp
+feature vpc
 vrf context AAA
 vpc domain 1
   role priority 10
@@ -157,6 +161,10 @@ interface Ethernet1/3
 ```
 NXOS-2
 ```
+conf t
+hostname NXOS-1
+feature lacp
+feature vpc
 vrf context AAA
 vpc domain 1
   role priority 20
@@ -173,6 +181,10 @@ interface Ethernet1/3
 
 NXOS-1
 ```
+conf t
+hostname NXOS-1
+feature lacp
+feature vpc
 feature interface-vlan
 vrf context BBB
 vlan 5
@@ -192,6 +204,10 @@ interface Ethernet1/3
 ```
 NXOS-2
 ```
+conf t
+hostname NXOS-1
+feature lacp
+feature vpc
 feature interface-vlan
 vrf context BBB
 vlan 5
