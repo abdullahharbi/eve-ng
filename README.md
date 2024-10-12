@@ -374,16 +374,16 @@ fabricpath domain default
 
 في المرحلة التالية  تطبيق هذه الاوامر على جميع سويتشات k7
 ```
+interface Ethernet2/7
+  switchport
+  switchport access vlan 10
+  no shutdown
+
 interface Ethernet2/1-6
   switchport
   switchport mode fabricpath
   no shutdown
 
-
-interface Ethernet2/7
-  switchport
-  switchport access vlan 10
-  no shutdown
 ```
 في اخر مرحلة تطبيق trank على interface الذي يربط بين k9 و k7  والموجود حسب هذا المخطط في NXOS-7
 ```
