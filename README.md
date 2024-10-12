@@ -85,22 +85,10 @@ Password: admin
 ```
 switch# dir
 ```
-سوف تظهر لك هذه المسارات فقط يهمك هذا المسار الذي يحدد ملف الاقلاع 
+سوف تظهر لك مجموعة من المسارات فقط يهمك هذا المسار الذي يحدد ملف الاقلاع 
 ```
 964875776    Jun 14 10:01:57 2018  nxos.7.0.3.I7.4.bin
 ```
-
-4096    Oct 11 06:47:12 2024  .rpmstore/\
-       4096    Oct 11 06:47:33 2024  .swtam/\
-     671311    Oct 11 07:34:10 2024  20241011_064913_poap_30659_1.log\
-    1048622    Oct 11 07:16:25 2024  20241011_064913_poap_30659_init.log\
-          0    Oct 11 06:47:22 2024  bootflash_sync_list\
-  964875776    Jun 14 10:01:57 2018  nxos.7.0.3.I7.4.bin\
-          0    Oct 11 07:34:49 2024  platform-sdk.cmd\
-       4096    Oct 11 06:49:07 2024  scripts/\
-       4096    Oct 11 06:49:07 2024  virt_strg_pool_bf_vdc_1/\
-       4096    Oct 11 06:47:59 2024  virtual-instance/\
-         59    Oct 11 06:47:49 2024  virtual-instance.conf\
 
 اكتب هذه الاوامر لتحديد الملف الذي سوف يتم الاقلاع منه و من ثم احفظ التغيرات
 ```
@@ -113,9 +101,10 @@ switch(config)# copy running-config startup-config
 
 [########################################] 100%
 
-بعد هذا تستطيع تهيئة k9 
-
-المهمة الاولى هي كيفية تفعيل peer-keepalive بين اجهزة NXOS
+بعد هذا تستطيع تهيئة k9 \
+******** تنبية مهم جدا جدا  ***********\
+في المهمة الاولى يتم فقط تحديد نوع الاتصال بين أجهزة NXOS اما management او interface او vlan  اما باقي المهام تبقى كما هي بدون تغيير\
+المهمة الاولى هي كيفية تفعيل peer-keepalive بين اجهزة NXOS بستخدام management
 
 
 
@@ -148,7 +137,80 @@ interface mgmt0
 
 vlan 10
 
+
 ```
+المهمة الاولى هي كيفية تفعيل peer-keepalive بين اجهزة NXOS بستخدام interface
+
+NXOS-1
+```
+vrf context AAA
+vpc domain 1
+  role priority 10
+  peer-keepalive destination 10.10.10.2 source 10.10.10.1 vrf AAA
+
+interface Ethernet1/3
+  no switchport
+  vrf member AAA
+  ip address 10.10.10.1/24
+  no shutdown
+
+```
+NXOS-2
+```
+vrf context AAA
+vpc domain 1
+  role priority 20
+  peer-keepalive destination 10.10.10.1 source 10.10.10.2 vrf AAA
+
+interface Ethernet1/3
+  no switchport
+  vrf member AAA
+  ip address 10.10.10.2/24
+  no shutdown
+
+```
+المهمة الاولى هي كيفية تفعيل peer-keepalive بين اجهزة NXOS بستخدام vlan
+
+NXOS-1
+```
+feature interface-vlan
+vrf context BBB
+vlan 5
+vpc domain 1
+  role priority 10
+  peer-keepalive destination 10.10.10.2 source 10.10.10.1 vrf BBB
+
+interface vlan 5
+  vrf member BBB
+  ip address 10.10.10.1/24
+  no shutdown
+
+interface Ethernet1/3
+  switchport access vlan 5
+
+
+```
+NXOS-2
+```
+feature interface-vlan
+vrf context BBB
+vlan 5
+vpc domain 1
+  role priority 20
+  peer-keepalive destination 10.10.10.1 source 10.10.10.2 vrf BBB
+
+interface vlan 5
+  vrf member BBB
+  ip address 10.10.10.2/24
+  no shutdown
+
+interface Ethernet1/3
+  switchport access vlan 5
+
+```
+
+
+
 هذه الاوامر كفيلة بتفعيل peer-keepalive
 
 ![image](https://github.com/user-attachments/assets/6df44f25-57d6-4858-9573-570279c6e34a)
